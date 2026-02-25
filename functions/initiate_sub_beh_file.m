@@ -1,5 +1,5 @@
 function [beh_form, beh_fid] = initiate_sub_beh_file(sub, sess_n, sub_dir, ...
-                                                      exp_code, house)
+                                                      exp_code, house, blk_str)
 
 % settings
 if sess_n == 1
@@ -12,6 +12,7 @@ elseif sess_n == 4
     ses_str = 'main-task';
 end
 
+
 if sess_n == 1
     if sub < 10
         fname   = sprintf('sub-0%d_ses-%s_house-%d_task-mforage_beh.tsv', ...
@@ -20,13 +21,21 @@ if sess_n == 1
         fname   = sprintf('sub-%d_ses-%s_house-%d_task-mforage_beh.tsv', ...
             sub, ses_str, house);
     end
-else
+elseif sess_n > 1 && sess_n < 4
     if sub < 10
         fname   = sprintf('sub-0%d_ses-%s_task-mforage_beh.tsv', ...
             sub, ses_str);
     else
         fname   = sprintf('sub-%d_ses-%s_task-mforage_beh.tsv', ...
             sub, ses_str);
+    end
+else
+    if sub < 10
+        fname   = sprintf('sub-0%d_ses-%s_b-%s_task-mforage_beh.tsv', ...
+            sub, ses_str, blk_str);
+    else
+        fname   = sprintf('sub-%d_ses-%s_b-%s_task-mforage_beh.tsv', ...
+            sub, ses_str, blk_str);
     end
 end
 

@@ -47,7 +47,7 @@ config.info.cb_cols = 6:9;
 config.info.colour_assign = 10;
 house = [];
 
-[beh_form, beh_fid] = initiate_sub_beh_file(sub.num, sub.stage, sub_dir, exp_code, house); % this is the behaviour and the events log
+[beh_form, beh_fid] = initiate_sub_beh_file(sub.num, sub.stage, sub_dir, exp_code, house, []); % this is the behaviour and the events log
 % probabilities of target location and number of doors
 load('probs_cert_world_v2.mat'); % this specifies that there are 4 doors with p=0.25 each 
 door_probs   = probs_cert_world;
