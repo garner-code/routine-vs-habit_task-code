@@ -147,11 +147,11 @@ srch_tgts = [1 2 3 4]; % all categories of image are game
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 InitializePsychSound(1); % in case PC doesn't have .dll file
 %devices = PsychPortAudio('GetDevices');
-sound_device_id = 2;
+sound_device_id = 1;
 nchannels = 2;
 req_lat = 2;
 frq = 48000;
-master = PsychPortAudio('Open', sound_device_id, 1+8, req_lat, frq, nchannels); % KG UPDATE THIS FOR LAB
+master = PsychPortAudio('Open', sound_device_id, 1+8, req_lat, frq, nchannels);
 %PsychPortAudio('Start', master, 0, 0, 0);   
 
 % coin sound

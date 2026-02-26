@@ -155,13 +155,14 @@ for ihid = 1:length(win_sounds)
         hidden_index = [hidden_index, ihid];
     end
 end
+sound_device_id = 1;
 win_sounds(hidden_index) = [];
 % now read in mp3 files
 coin_handles = cell(1, numel(length(win_sounds)));
 for imp3 = 1:length(win_sounds)
     mp3fname = fullfile(win_sounds(imp3).folder, win_sounds(imp3).name);
     [y, freq] = audioread(mp3fname);
-    coin_handles{imp3} = PsychPortAudio('Open', [], [], 0, freq, size(y, 2)); % get handle
+    coin_handles{imp3} = PsychPortAudio('Open', sound_device_id, [], 0, freq, size(y, 2)); % get handle
     PsychPortAudio('FillBuffer', coin_handles{imp3}, y'); % fill buffer with sound
 end
 
