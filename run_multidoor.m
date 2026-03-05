@@ -30,7 +30,6 @@ sub.num = input('sub number? ');
 sub.stage = 4; % 4 = the real deal
 exp_code = 'hvr_data';
 sub_dir = make_sub_folders(sub.num, sub.stage, exp_code);
-
 % set randomisation seed based on sub/sess number
 stage = sub.stage;
 r_num = [num2str(sub.num) num2str(sub.stage)];
@@ -126,6 +125,13 @@ xPos = repmat(xPos, 4, 1);
 yPos = repmat(yPos', 1, 4);
 r = doorPix/2; % radius is the distance from center to the edge of the door
 
+% set up badges for motivation
+badge_names = {'Bronze', 'Silver', 'Gold', 'Champion'}; % DEFINE FOR REG AND LOCKED
+[badge_textures, badge_rects] = setup_badges(window, screenXpixels, ...
+    screenYpixels, 50, pix_per_mm, badge_names);
+points_structure = 14400.*[.2, .45, .65, .85]; % 14400 is the max you could score 
+% over whole exp
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% timing 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -147,7 +153,7 @@ srch_tgts = [1 2 3 4]; % all categories of image are game
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 InitializePsychSound(1); % in case PC doesn't have .dll file
 %devices = PsychPortAudio('GetDevices');
-sound_device_id = 1;
+sound_device_id = 1; % should be 1 for lab
 nchannels = 2;
 req_lat = 2;
 frq = 48000;
@@ -184,16 +190,18 @@ SetMouse(xCenter, yCenter, window);
 block_types = sub_config(config.info.task_order);
 moves_record = [];
 moves_goal = 4;
-tpoints = 0; % not collecting in this phase, but presetting
-points_structure = []; % as above
-badge_rects = [];
-badge_tex = [];
+tpoints = 0; %
 mt_blocks_done = 0;
 st_blocks_done = 0;
 
 % run_instructions
+run_multi_instructions_main(window, screenYpixels, time, badge_rects,...
+    badge_textures, points_structure)
+KbWait();
+WaitSecs(time.wait_after_instruct);
 
-for count_blocks = 1:length(trial_sets)
+nblocks = length(trial_sets);
+for count_blocks = 1:nblocks
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % step 1: is this a multiasking block? if so, set up the N back task
@@ -276,13 +284,11 @@ for count_blocks = 1:length(trial_sets)
     reward_trials = datasample(reward_trials, n_reward_trials, 'Replace', false);
     reward_trials = sort(reward_trials, 'ascend');
 
-    % insert run block instructions here
-    Screen('TextSize', window, 40);          % Set your text size
-    Screen('TextFont', window, 'Arial');     % Optional
-    DrawFormattedText(window, 'Hello world!', 'center', 'center', [255 255 255]);
-    Screen('Flip', window);
-    KbWait;
-    WaitSecs(1); 
+    if count_blocks > 1
+    run_badge_feedback(window, tpoints, points_structure, screenYpixels, ...
+        badge_rects, badge_textures, time);
+    end
+    run_multi_instructions_block;
 
     % Draw a regular display with blocks and start working memory task
     % draw doors and start
@@ -376,6 +382,7 @@ for count_blocks = 1:length(trial_sets)
             srch_tex, xCenter, yCenter, time.context_cue_on, ...
             trial_start, door_select_count, feedback_on, ...
             coin_handles);
+        tpoints = tpoints + points;
         % now draw target texture for next trial while target is being
         % displayed, but still poll the mouse
         nxt_tgt_drawn = 0;
@@ -394,6 +401,7 @@ for count_blocks = 1:length(trial_sets)
                 sub.stage, count_trials, trials(count_trials,2), ...
                 tgt_flag)
         end
+
 
     end
 
@@ -447,6 +455,7 @@ end
 
 % end the experiment
 % insert end message
+run_end_message;
 sca;
 Priority(0);
 PsychPortAudio('Stop', master);

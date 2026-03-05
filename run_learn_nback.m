@@ -46,7 +46,7 @@ out_file = set_sub_audio_file_path(sub.num, exp_code, sub_dir, stage, []);
 n = 2; % we're doing a 2-back task
 dur_isi = 3000; % we want 3000 ms between the start of each item
 tgt_rate = .33; % 33% of the stream will be targets
-min_time = 2; % the sequence will go for 2 minutes
+min_time = 3; % the sequence will go for x minutes
 [stream, is_target, onsets, onsets_in_sec] = generate_nback_stream(out_file,...
     n, dur_isi, tgt_rate, min_time);
 
@@ -121,7 +121,7 @@ num_frames_memory = round(time.memory_task / ifi);
 % main task
 InitializePsychSound(1); % in case PC doesn't have .dll file
 %devices = PsychPortAudio('GetDevices');
-sound_device_id = 1;
+sound_device_id = 1; % should be 1, if in lab
 master = PsychPortAudio('Open', sound_device_id, 1+8, 2, 48000, 2); 
 memory = PsychPortAudio('OpenSlave', master, 1, 2);
 
@@ -136,7 +136,7 @@ PsychPortAudio('Start', master, 0, 0, 0);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% lets tell them what to do
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-run_n_back_instructions(window, screenYpixels);
+run_n_back_instructions(window, screenYpixels, time);
 KbWait;
 WaitSecs(time.wait_after_instruct);
 
@@ -182,16 +182,17 @@ scores = score_nback_responses(resp.press_time_in_rt, ...
                       task.is_target, ...
                       dur_isi);
 
+% now save the scores to the log matrix
+save(task_log_fname, 'scores', '-append');
+
+run_n_back_end(window, screenYpixels, scores, task);
+KbWait;
+WaitSecs(time.wait_after_instruct);
+
+
 KbQueueRelease(device_index);
 PsychPortAudio('Close');
 Screen('CloseAll');
 
-% now save the scores to the log matrix
-save(task_log_fname, 'scores', '-append');
 
-acc = sum(scores.hit_count)/sum(task.is_target);
-fa = sum(scores.fa_count)/sum(task.is_target);
-
-sprintf('Accuracy score: %.2f%%', acc)
-sprintf('False alarm score: %.2f%%', fa)
 
