@@ -288,7 +288,8 @@ for count_blocks = 1:nblocks
     run_badge_feedback(window, tpoints, points_structure, screenYpixels, ...
         badge_rects, badge_textures, time);
     end
-    run_multi_instructions_block;
+    run_multi_instructions_block(window, screenYpixels, time, ...
+    count_blocks, nblocks, current_block_type);
 
     % Draw a regular display with blocks and start working memory task
     % draw doors and start

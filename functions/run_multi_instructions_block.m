@@ -32,8 +32,8 @@ else
         ]);
 end
 
-DrawFormattedText(window, progress, 'Center', screenYpixels*.5, instruct_col);
-DrawFormattedText(window, block_instruct, 'Center', screenYpixels*.6, instruct_col);
+DrawFormattedText(window, progress, 'Center', screenYpixels*.3, instruct_col);
+DrawFormattedText(window, block_instruct, 'Center', screenYpixels*.4, instruct_col);
 Screen('Flip', window);
 
 KbWait;
