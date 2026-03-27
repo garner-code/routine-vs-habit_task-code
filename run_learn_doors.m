@@ -126,8 +126,8 @@ KbCheck;
 KbName('UnifyKeyNames');
 GetSecs;
 AssertOpenGL
-Screen('Preference', 'SkipSyncTests', 1);
-PsychDebugWindowConfiguration;
+Screen('Preference', 'SkipSyncTests', 0);
+%PsychDebugWindowConfiguration;
 monitorXdim = 530; % in mm % KG: MFORAGE: GET FOR UNSW MATTHEWS MONITORS
 monitorYdim = 300; % in mm
 screens = Screen('Screens');

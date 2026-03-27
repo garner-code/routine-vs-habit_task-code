@@ -70,8 +70,8 @@ KbCheck;
 KbName('UnifyKeyNames');
 %ListenChar(2);% suppress keyboard echo to MATLAB/Octave window
 GetSecs;
-%Screen('Preference', 'SkipSyncTests', 0);
-PsychDebugWindowConfiguration;
+Screen('Preference', 'SkipSyncTests', 0);
+%PsychDebugWindowConfiguration;
 monitorXdim = 530; % in mm % KG: MFORAGE: GET FOR UNSW MATTHEWS MONITORS
 monitorYdim = 300; % in mm
 screens = Screen('Screens');

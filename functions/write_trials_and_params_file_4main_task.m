@@ -3,7 +3,11 @@ function [trlg_fid] = write_trials_and_params_file_4main_task(sub, stage, ...
     door_probs, sub_loc_config, door_ps, sub_dir, task)
 
 % write a record of the trials and various params for this subject
-ses_str = 'main-task';
+if stage == 4
+    ses_str = 'main-task';
+else
+    ses_str = 'practice-multi';
+end
 
 if sub < 10
     trlfname   = sprintf('sub-0%d_ses-%s_b-%s_task-mforage_trls.tsv', sub, ses_str, blk_str);

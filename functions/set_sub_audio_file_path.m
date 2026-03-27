@@ -3,8 +3,10 @@ function [wavfname] = set_sub_audio_file_path(sub, exp_code, sub_dir, stage, blo
 
 if stage == 3
     ses_str = 'learn-nback';
-else
+elseif stage == 4
     ses_str = 'main-task';
+elseif stage == 5
+    ses_str = 'practice-multi';
 end
 
 if isempty(block)
@@ -19,7 +21,7 @@ else
     if sub < 10
         wavfname   = sprintf('sub-0%d_ses-%s_b-%d_task-n-back-stream.wav', sub, ses_str, block);
     else
-        wavfname   = sprintf('sub-%d_ses-%s_b--%d_task-n-back-stream.wav.tsv', sub, ses_str, block);
+        wavfname   = sprintf('sub-%d_ses-%s_b-%d_task-n-back-stream.wav.tsv', sub, ses_str, block);
     end
 end
 

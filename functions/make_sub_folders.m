@@ -10,6 +10,8 @@ elseif sess == 3
     ses_str = 'learn-nback';
 elseif sess == 4
     ses_str = 'main-task';
+elseif sess == 5
+    ses_str = 'practice-multi';
 end
 
 if sub < 10

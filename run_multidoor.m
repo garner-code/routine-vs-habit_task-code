@@ -90,8 +90,8 @@ KbCheck;
 KbName('UnifyKeyNames');
 GetSecs;
 AssertOpenGL
-Screen('Preference', 'SkipSyncTests', 1);
-PsychDebugWindowConfiguration;
+Screen('Preference', 'SkipSyncTests', 0);
+%PsychDebugWindowConfiguration;
 monitorXdim = 530; % in mm % KG: MFORAGE: GET FOR UNSW MATTHEWS MONITORS
 monitorYdim = 300; % in mm
 screens = Screen('Screens');
@@ -126,7 +126,7 @@ yPos = repmat(yPos', 1, 4);
 r = doorPix/2; % radius is the distance from center to the edge of the door
 
 % set up badges for motivation
-badge_names = {'Bronze', 'Silver', 'Gold', 'Champion'}; % DEFINE FOR REG AND LOCKED
+badge_names = {'1_lowly_llama', '2_novice_narwhal', '3_awesome_anteater', '4_radiant_rhinoceros'}; % DEFINE FOR REG AND LOCKED
 [badge_textures, badge_rects] = setup_badges(window, screenXpixels, ...
     screenYpixels, 50, pix_per_mm, badge_names);
 points_structure = 14400.*[.2, .45, .65, .85]; % 14400 is the max you could score 
