@@ -8,6 +8,6 @@ if sum(unlocked) % if any are unlocked
 end
 Screen('DrawTextures', window, badge_tex, [], badge_rects, [], ...
     [], alphas);
-Screen('FrameRect', window, [255, 255, 255], badge_rects, 10);
+Screen('FrameRect', window, [255, 255, 255], badge_rects, 2);
 
 end
