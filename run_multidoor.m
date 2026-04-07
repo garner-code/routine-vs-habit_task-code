@@ -129,7 +129,7 @@ r = doorPix/2; % radius is the distance from center to the edge of the door
 badge_names = {'1_lowly_llama', '2_novice_narwhal', '3_awesome_anteater', '4_radiant_rhinoceros'}; % DEFINE FOR REG AND LOCKED
 [badge_textures, badge_rects] = setup_badges(window, screenXpixels, ...
     screenYpixels, 50, pix_per_mm, badge_names);
-points_structure = 14400.*[.2, .45, .65, .85]; % 14400 is the max you could score 
+points_structure = [3000 6000 11000 13000]; %14400.*[.2, .45, .65, .85]; % 14400 is the max you could score 
 % over whole exp
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -456,7 +456,8 @@ end
 
 % end the experiment
 % insert end message
-run_end_message;
+run_end_message(window, tpoints, points_structure, screenYpixels, ...
+    badge_rects, badge_textures, time);
 sca;
 Priority(0);
 PsychPortAudio('Stop', master);

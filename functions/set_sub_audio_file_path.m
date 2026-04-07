@@ -13,7 +13,7 @@ if isempty(block)
     if sub < 10
         wavfname   = sprintf('sub-0%d_ses-%s_task-n-back-stream.wav', sub, ses_str);
     else
-        wavfname   = sprintf('sub-%d_ses-%s_task-n-back-stream.wav.tsv', sub, ses_str);
+        wavfname   = sprintf('sub-%d_ses-%s_task-n-back-stream.wav', sub, ses_str);
     end
 
 else
@@ -21,7 +21,7 @@ else
     if sub < 10
         wavfname   = sprintf('sub-0%d_ses-%s_b-%d_task-n-back-stream.wav', sub, ses_str, block);
     else
-        wavfname   = sprintf('sub-%d_ses-%s_b-%d_task-n-back-stream.wav.tsv', sub, ses_str, block);
+        wavfname   = sprintf('sub-%d_ses-%s_b-%d_task-n-back-stream.wav', sub, ses_str, block);
     end
 end
 
