@@ -453,6 +453,8 @@ for count_blocks = 1:nblocks
 
 end
 
+% save the subject's total number of points
+save_sub_points(sub, sub_dir, exp_code, task, tpoints);
 
 % end the experiment
 % insert end message
