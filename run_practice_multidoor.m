@@ -146,7 +146,7 @@ srch_tgts = [1 2 3 4]; % all categories of image are game
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 InitializePsychSound(1); % in case PC doesn't have .dll file
 %devices = PsychPortAudio('GetDevices');
-sound_device_id = 1; % should be 1 for lab
+sound_device_id = 1; % 4; % should be 1 for lab
 nchannels = 2;
 req_lat = 2;
 frq = 48000;

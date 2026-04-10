@@ -121,7 +121,7 @@ num_frames_memory = round(time.memory_task / ifi);
 % main task
 InitializePsychSound(1); % in case PC doesn't have .dll file
 %devices = PsychPortAudio('GetDevices');
-sound_device_id = 1; % should be 1, if in lab
+sound_device_id = 1; %1; % should be 1, if in lab
 master = PsychPortAudio('Open', sound_device_id, 1+8, 2, 48000, 2); 
 memory = PsychPortAudio('OpenSlave', master, 1, 2);
 

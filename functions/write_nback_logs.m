@@ -6,7 +6,9 @@ task.exp_code = exp_code;
 
 if stage == 3
     ses_str = 'learn-nback';
-else
+elseif stage == 5
+    ses_str = 'practice-multi';
+elseif stage == 4
     ses_str = 'main-task';
 end
 
